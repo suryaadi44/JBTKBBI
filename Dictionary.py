@@ -1,7 +1,6 @@
 import os
 import sys
 import csv
-import platform
 import time
 from rich import print
 from lib.hash import Hash as Hash
@@ -51,19 +50,6 @@ def loadTable(hashTable, indeks=-1):
                     print(f'{fileNames[i]} : Processed {line_count} lines.')
                     time.sleep(0.5)
 
-
-def pause():
-    if platform.system() == 'Windows':
-        os.system('pause')
-    else:
-        input("Press Enter to continue.....")
-
-
-def clear():
-    if platform.system() == 'Windows':
-        os.system('cls')
-    else:
-        os.system('clear')
 
 def commandLineMode(hash, kata):
     #Program dijalankan dengang langsung memberikan kata tanpa melewati menu
