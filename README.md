@@ -1,4 +1,4 @@
-# **JBTKBBI**
+# **JBT-KBBI**
 
 ```
 
@@ -12,7 +12,7 @@
 
 # *JUST BASIC TERMINAL KBBI*
 
-Program Kamus Besar Bahasa Indonesia Offline berbasis Terminal menggunakan bahasa Python.
+Program Kamus Besar Bahasa Indonesia Offline berbasis Terminal menggunakan bahasa Python sebagai final project untuk mata kuliah Praktikum Struktur Data. 
 
 By:
 - Hans Rio Alfredo Pala <2008561030>
@@ -23,7 +23,7 @@ By:
 
 
 
-## Supported Feature :
+## Supported Feature
 
 Fitur-fitur yang ada sejauh ini:
 
@@ -32,12 +32,12 @@ Fitur-fitur yang ada sejauh ini:
 - Add Kata. ***(TBA)***
 - Delete Kata. ***(TBA)***
 
-## Requirements :
+## Requirements
 
 Modul modul yang dibutuhkan sebelum menjalankan program.
 
 > ### Python3
-> Install python dari : `https://www.python.org/downloads/`
+> Install python dari `https://www.python.org/downloads/`
 
 > ### Pip
 > Cek instalasi pi dengan menjalankan `pip -h`
@@ -48,4 +48,4 @@ Modul modul yang dibutuhkan sebelum menjalankan program.
 
 ## Copyright
 
-Project ini mengandung kamus kata dasar yang telah dirubah dan berasal dari [KBBI Qt](https://github.com/bgli/kbbi-qt/+) dengan lisensi [GPL-3.0 License](https://www.gnu.org/licenses/gpl-3.0.en.html).
+Project ini mengandung kamus kata dasar yang telah dirubah dan berasal dari [KBBI Qt](https://github.com/bgli/kbbi-qt/) dengan lisensi [GPL-3.0 License](https://www.gnu.org/licenses/gpl-3.0.en.html).
