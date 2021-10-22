@@ -15,12 +15,8 @@ class Hash:
 
     def search(self, kata):
         hasil = self._search(kata)
-        if(hasil is not None):
-            print(f'Kata {kata} ditemukan')
-            print(f'\n{kata} :')
-
+        if hasil is not None:
             arti = hasil.arti
-            
             arti = re.sub(r'(\[*b\])([0-9])(\[*/b\])','\n \g<1>\g<2>\g<3>', arti)
             arti = re.sub(r'(\[*b\])([0-9] )', '\n\n\g<1>\g<2>', arti)
             arti = arti.replace(';;', '\n')
@@ -29,8 +25,8 @@ class Hash:
             arti = re.sub(r'^\n*', '', arti)
             
             return arti
-        else:
-            return "Kata Tidak Ditemukan"
+        
+        return None
 
     def _search(self, kata):
         # Panggil method di class Tree untuk search kata

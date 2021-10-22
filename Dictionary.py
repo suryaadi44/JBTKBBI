@@ -69,7 +69,14 @@ def interactiveMode(hash):
 
             if(pil == 1):
                 kata = input("\nMasukan Kata : ")
-                print(hash.search(kata.lower()))
+                hasil = hash.search(kata.lower())
+
+                if(hasil is not None):
+                    print(f'Kata {kata} ditemukan')
+                    print(f'\n{kata} :')
+                    print(hasil)
+                else:
+                    print("Kata Tidak Ditemukan")
 
             else:
                 print("[blink bold red]Feature TBA[/blink bold red]")
