@@ -3,7 +3,7 @@
 *.doc
 
 #Testing and Debug
-*test.py
+*test*
 
 # Database
 DB/
@@ -16,7 +16,7 @@ DB/
 #vscode
 .vscode/
 *.code-workspace
-tempCodeRunnerFile.py
+tempCodeRunnerFile.*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
