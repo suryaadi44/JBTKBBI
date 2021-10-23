@@ -3,7 +3,7 @@
 *.doc
 
 #Testing and Debug
-*test.py
+*test*
 
 # Database
 DB/
