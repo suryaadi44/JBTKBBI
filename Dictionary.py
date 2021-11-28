@@ -17,10 +17,9 @@ def loadDB(file):
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
-            kata = row[0]
-            arti = row[1]
+            kata, arti = row[0], row[1]
 
-            index = ord(kata[0]) - 97
+            index = Hash.calcHash(kata)
             fileData = open(f'DB/{fileNames[index]}', 'a', encoding='utf-8')
             fileData.write(f'"{kata}","{arti}"\n')
             fileData.close()
@@ -41,8 +40,7 @@ def loadTable(hashTable, indeks=-1):
                 csv_reader = csv.reader(csv_file, delimiter=',')
                 line_count = 0
                 for row in csv_reader:
-                    kata = row[0]
-                    arti = row[1]
+                    kata, arti = row[0], row[1]
 
                     hashTable.add(i, kata, arti)
 
@@ -58,26 +56,29 @@ def commandLineMode(hash, kata):
 
 def interactiveMode(hash):
     #Program interaktif melalui menu
-    while(True):
+    while True:
         try:
             system.clear()
             print("Menu :")
             print(" 1.Search")
             print(" 2.History [blink bold red](TBA)[/blink bold red]")
             print(" 3.Settings [blink bold red](TBA)[/blink bold red]")
+            print(" 4.Keluar")
+            
             pil = int(input("Masukan Pilihan : "))
 
-            if(pil == 1):
+            if pil == 1:
                 kata = input("\nMasukan Kata : ")
                 hasil = hash.search(kata.lower())
 
-                if(hasil is not None):
+                if hasil is not None :
                     print(f'Kata {kata} ditemukan')
                     print(f'\n{kata} :')
                     print(hasil)
                 else:
                     print("Kata Tidak Ditemukan")
-
+            elif pil == 4:
+                break
             else:
                 print("[blink bold red]Feature TBA[/blink bold red]")
 
