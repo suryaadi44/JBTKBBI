@@ -4,7 +4,7 @@ import csv
 import time
 from rich import print
 from lib.hash import Hash as Hash
-import lib.os as system
+import lib.system as system
 
 fileNames = ['kbbi_a.csv', 'kbbi_b.csv', 'kbbi_c.csv', 'kbbi_d.csv', 'kbbi_e.csv', 'kbbi_f.csv', 'kbbi_g.csv', 'kbbi_h.csv', 'kbbi_i.csv', 'kbbi_j.csv', 'kbbi_k.csv', 'kbbi_l.csv', 'kbbi_m.csv','kbbi_n.csv', 'kbbi_o.csv', 'kbbi_p.csv', 'kbbi_q.csv', 'kbbi_r.csv', 'kbbi_s.csv', 'kbbi_t.csv', 'kbbi_u.csv', 'kbbi_v.csv', 'kbbi_w.csv', 'kbbi_x.csv', 'kbbi_y.csv', 'kbbi_z.csv']
 defaultDB = "shuffled_kbbi_python.csv"
@@ -20,7 +20,7 @@ def loadDB(file):
             kata, arti = row[0], row[1]
 
             index = Hash.calcHash(kata)
-            fileData = open(f'DB/{fileNames[index]}', 'a', encoding='utf-8')
+            fileData = open(f'DB\{fileNames[index]}', 'a', encoding='utf-8')
             fileData.write(f'"{kata}","{arti}"\n')
             fileData.close()
 
@@ -88,7 +88,8 @@ def interactiveMode(hash):
         system.pause()
 
 def main():
-    if not os.path.exists(f'DB/{fileNames[0]}'):
+    if not os.path.exists(f'DB/'):
+        os.mkdir("DB/")
         loadDB(defaultDB)
 
     hash = Hash()
@@ -101,4 +102,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()    
+    main()
