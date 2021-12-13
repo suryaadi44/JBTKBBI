@@ -5,6 +5,7 @@ import time
 from rich import print
 from lib.hash import Hash as Hash
 import lib.system as system
+import lib.history as history
 
 fileNames = ['kbbi_a.csv', 'kbbi_b.csv', 'kbbi_c.csv', 'kbbi_d.csv', 'kbbi_e.csv', 'kbbi_f.csv', 'kbbi_g.csv', 'kbbi_h.csv', 'kbbi_i.csv', 'kbbi_j.csv', 'kbbi_k.csv', 'kbbi_l.csv', 'kbbi_m.csv','kbbi_n.csv', 'kbbi_o.csv', 'kbbi_p.csv', 'kbbi_q.csv', 'kbbi_r.csv', 'kbbi_s.csv', 'kbbi_t.csv', 'kbbi_u.csv', 'kbbi_v.csv', 'kbbi_w.csv', 'kbbi_x.csv', 'kbbi_y.csv', 'kbbi_z.csv']
 defaultDB = "shuffled_kbbi_python.csv"
@@ -61,7 +62,7 @@ def interactiveMode(hash):
             system.clear()
             print("Menu :")
             print(" 1.Search")
-            print(" 2.History [blink bold red](TBA)[/blink bold red]")
+            print(" 2.History")
             print(" 3.Settings [blink bold red](TBA)[/blink bold red]")
             print(" 4.Keluar")
             
@@ -70,6 +71,7 @@ def interactiveMode(hash):
             if pil == 1:
                 kata = input("\nMasukan Kata : ")
                 hasil = hash.search(kata.lower())
+                history.addHistory(kata)
 
                 if hasil is not None :
                     print(f'Kata {kata} ditemukan')
@@ -77,6 +79,17 @@ def interactiveMode(hash):
                     print(hasil)
                 else:
                     print("Kata Tidak Ditemukan")
+            elif pil == 2:
+                system.clear()
+                history.printHistory()
+            elif pil == 3:
+                system.clear()
+                print("Menu Setting :")
+                print(" 1.Delete History")
+                
+                pilSetting = int(input("Masukan Pilihan : "))
+                if pilSetting == 1:
+                    history.deleteHistory()
             elif pil == 4:
                 break
             else:
