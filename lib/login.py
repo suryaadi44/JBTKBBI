@@ -1,70 +1,67 @@
+from .system import *
 
 def register():
-    db = open("database.txt", "r")
-    username = input("Masukkan username: ")
-    password = input("Masukkan password: ")
-    confirm = input("Konfirmasi password: ")
-    username1 = []
-    password1 = []
-    for i in db:
-        a, b = i.split(",")
-        b = b.strip()
-        username1.append(a)
-        password1.append(b)
-    data = dict(zip(username1, password1))
-
-    if password != confirm:
-        print("Password tidak sesuai")
-        register()
-    else:
-        if len(password) <= 6:
-            print("Password terlalu pendek")
-            register()
-        elif username in username1:
-            print("Akun sudah terdaftar")
-            register()
-        else:
-            db = open("database.txt", "a")
-            db.write(username + "," + password + "\n")
-            print('Success!')
-
-
-
-def access():
-    db = open("database.txt", "r")
-
-    username = input("Masukkan username: ")
-    password = input("Masukkan password: ")
-
-    if not len(username or password) < 1:
+    with open("database.txt", "r") as db:
+        username = input("Masukkan username: ")
+        password = input("Masukkan password: ")
+        confirm = input("Konfirmasi password: ")
         username1 = []
         password1 = []
+
         for i in db:
             a, b = i.split(",")
             b = b.strip()
             username1.append(a)
             password1.append(b)
-        data = dict(zip(username1, password1))
-        try:
-            if data[username]:
-                try:
-                    if password == data[username]:
-                        print("Login Success")
-                        print("Hai, ", username)
-                    else:
-                        print("Password atau Username anda salah")
-                        home()
-                except:
-                    print("Terjadi kesalahan")
-                    home()
+       
+        if password != confirm:
+            print("Password tidak sesuai")
+        else:
+            if len(password) <= 6:
+                print("Password terlalu pendek") 
+            elif username in username1:
+                print("Akun sudah terdaftar")
             else:
-                print("username tidak terdaftar")
-                home()
-        except:
-            print("Login Eror")
-            print("Anda belum memiliki akun, silahkan Signup terlebih dahulu ")
+                db = open("database.txt", "a")
+                db.write(username + "," + password + "\n")
+                print('Success!')
+                return
+        register()
+
+def access():
+    with open("database.txt", "r") as db:
+        username = input("Masukkan username: ")
+        password = input("Masukkan password: ")
+
+        if not len(username or password) < 1:
+            username1 = []
+            password1 = []
+            for i in db:
+                a, b = i.split(",")
+                b = b.strip()
+                username1.append(a)
+                password1.append(b)
+            data = dict(zip(username1, password1))
+            try:
+                if data[username]:
+                    try:
+                        if password == data[username]:
+                            print("Login Success")
+                            print("Hai, ", username)
+                            pause()
+                        else:
+                            print("Password atau Username anda salah") 
+                    except:
+                        print("Terjadi kesalahan")
+                else:
+                    print("username tidak terdaftar")
+            except:
+                print("Login Eror")
+                print("Anda belum memiliki akun, silahkan Signup terlebih dahulu ")
             home()
-def home(option=None):
+            
+def home():
+    clear()
     option = int(input("1.Login | 2.Signup: "))
     if option == 1:
         access()
