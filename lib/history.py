@@ -14,9 +14,8 @@ def printHistory():
         print("Riwayat kosong")
     else:
         print("Daftar Riwayat")
-        for i in range (len(history)):
-            print(i + 1, end = " ")
-            print(history[i])
+        for i in range(len(history)):
+            print(f"{i + 1} {history[i]}")
 
 def deleteHistory():
     x = checkListHistory()

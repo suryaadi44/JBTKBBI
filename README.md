@@ -28,7 +28,7 @@ By:
 Fitur-fitur yang ada sejauh ini:
 
 - Search.
-- History. ***(TBA)***
+- History. 
 - Add Kata. ***(TBA)***
 - Delete Kata. ***(TBA)***
 

@@ -21,10 +21,10 @@ def loadDB(file):
             kata, arti = row[0], row[1]
 
             index = Hash.calcHash(kata)
-            fileData = open(f'DB\{fileNames[index]}', 'a', encoding='utf-8')
-            fileData.write(f'"{kata}","{arti}"\n')
-            fileData.close()
 
+            with open(f'DB\{fileNames[index]}', 'a', encoding='utf-8') as fileData:
+                fileData.write(f'"{kata}","{arti}"\n')
+            
             line_count += 1
         if debug:
             print(f'Processed {line_count} lines.')
@@ -63,7 +63,7 @@ def interactiveMode(hash):
             print("Menu :")
             print(" 1.Search")
             print(" 2.History")
-            print(" 3.Settings [blink bold red](TBA)[/blink bold red]")
+            print(" 3.Settings")
             print(" 4.Keluar")
             
             pil = int(input("Masukan Pilihan : "))
