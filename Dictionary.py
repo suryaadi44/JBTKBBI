@@ -8,6 +8,7 @@ import lib.system as system
 
 fileNames = ['kbbi_a.csv', 'kbbi_b.csv', 'kbbi_c.csv', 'kbbi_d.csv', 'kbbi_e.csv', 'kbbi_f.csv', 'kbbi_g.csv', 'kbbi_h.csv', 'kbbi_i.csv', 'kbbi_j.csv', 'kbbi_k.csv', 'kbbi_l.csv', 'kbbi_m.csv','kbbi_n.csv', 'kbbi_o.csv', 'kbbi_p.csv', 'kbbi_q.csv', 'kbbi_r.csv', 'kbbi_s.csv', 'kbbi_t.csv', 'kbbi_u.csv', 'kbbi_v.csv', 'kbbi_w.csv', 'kbbi_x.csv', 'kbbi_y.csv', 'kbbi_z.csv']
 defaultDB = "shuffled_kbbi_python.csv"
+history = [];
 
 debug = 0
 
@@ -61,7 +62,7 @@ def interactiveMode(hash):
             system.clear()
             print("Menu :")
             print(" 1.Search")
-            print(" 2.History [blink bold red](TBA)[/blink bold red]")
+            print(" 2.History")
             print(" 3.Settings [blink bold red](TBA)[/blink bold red]")
             print(" 4.Keluar")
             
@@ -70,6 +71,7 @@ def interactiveMode(hash):
             if pil == 1:
                 kata = input("\nMasukan Kata : ")
                 hasil = hash.search(kata.lower())
+                history.append(kata);
 
                 if hasil is not None :
                     print(f'Kata {kata} ditemukan')
@@ -77,6 +79,19 @@ def interactiveMode(hash):
                     print(hasil)
                 else:
                     print("Kata Tidak Ditemukan")
+            elif pil == 2:
+                print("Menu History: ")
+                print(" 1.Show History")
+                print(" 2.Delete History")
+                x = checkListHistory()
+
+                pilHistory = int(input("Masukan Pilihan : "))
+                if pilHistory == 1:
+                    printHistory(x)
+                elif pilHistory == 2:
+                    deleteHistory(x)
+                else:
+                    print("Maaf, hanya ada dua pilihan")
             elif pil == 4:
                 break
             else:
@@ -86,6 +101,26 @@ def interactiveMode(hash):
             print(f"[blink bold red] Incorrect Input!![/blink bold red]")
 
         system.pause()
+
+def checkListHistory():
+    if(len(history) == 0):
+        return 0
+    return 1
+
+def printHistory(x):
+    if (x == 0):
+        print("Riwayat kosong")
+    else:
+        for i in range (len(history)):
+            print(i + 1, end = " ")
+            print(history[i])
+
+def deleteHistory(x):
+    if (x == 0):
+        print("Riwayat kosong")
+    else:
+        history.clear()
+        print("Daftar Riwayat terhapus")
 
 def main():
     if not os.path.exists(f'DB/'):
