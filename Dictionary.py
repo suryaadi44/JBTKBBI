@@ -5,6 +5,7 @@ import time
 from rich import print
 from lib.hash import Hash as Hash
 import lib.system as system
+import lib.login as login
 
 fileNames = ['kbbi_a.csv', 'kbbi_b.csv', 'kbbi_c.csv', 'kbbi_d.csv', 'kbbi_e.csv', 'kbbi_f.csv', 'kbbi_g.csv', 'kbbi_h.csv', 'kbbi_i.csv', 'kbbi_j.csv', 'kbbi_k.csv', 'kbbi_l.csv', 'kbbi_m.csv','kbbi_n.csv', 'kbbi_o.csv', 'kbbi_p.csv', 'kbbi_q.csv', 'kbbi_r.csv', 'kbbi_s.csv', 'kbbi_t.csv', 'kbbi_u.csv', 'kbbi_v.csv', 'kbbi_w.csv', 'kbbi_x.csv', 'kbbi_y.csv', 'kbbi_z.csv']
 defaultDB = "shuffled_kbbi_python.csv"
@@ -86,92 +87,23 @@ def interactiveMode(hash):
             print(f"[blink bold red] Incorrect Input!![/blink bold red]")
 
         system.pause()
-def register():
-    db = open("database.txt", "r")
-    username = input("Masukkan username: ")
-    password = input("Masukkan password: ")
-    confirm = input("Konfirmasi password: ")
-    username1 = []
-    password1 = []
-    for i in db:
-        a, b = i.split(",")
-        b = b.strip()
-        username1.append(a)
-        password1.append(b)
-    data = dict(zip(username1, password1))
-    print(data)
-    if password != confirm:
-        print("Password tidak sesuai")
-        register()
-    else:
-        if len(password) <= 6:
-            print("Password terlalu pendek")
-            register()
-        elif username in username1:
-            print("Akun sudah terdaftar")
-            register()
-        else:
-            db = open("database.txt", "a")
-            db.write(username + "," + password + "\n")
-            print('Success!')
-            access()
 
-
-def access():
-    db = open("database.txt", "r")
-
-    username = input("Masukkan username: ")
-    password = input("Masukkan password: ")
-
-    if not len(username or password) < 1:
-        username1 = []
-        password1 = []
-        for i in db:
-            a, b = i.split(",")
-            b = b.strip()
-            username1.append(a)
-            password1.append(b)
-        data = dict(zip(username1, password1))
-        try:
-            if data[username]:
-                try:
-                    if password == data[username]:
-                        print("Login Success")
-                        print("Hai, ", username)
-                        if not os.path.exists(f'DB/'):
-                            os.mkdir("DB/")
-                            loadDB(defaultDB)
-
-                        hash = Hash()
-                        loadTable(hash)
-
-                        if len(sys.argv) == 1:
-                            interactiveMode(hash)
-                        else:
-                            commandLineMode(hash, sys.argv[1])
-
-                    else:
-                        print("Password atau Username anda salah")
-                except:
-                    print("Terjadi kesalahan")
-            else:
-                print("username tidak terdaftar")
-        except:
-            print("Login Eror")
-
-
-def home(option=None):
-    option = input("Login | Signup: ")
-    if option == 'Login':
-        access()
-    elif option == 'Signup':
-        register()
-    else:
-        print("please, enter an option")
 
 
 def main():
-    home()
+    if not os.path.exists(f'DB/'):
+        os.mkdir("DB/")
+        loadDB(defaultDB)
+
+    hash = Hash()
+    loadTable(hash)
+
+    if len(sys.argv) == 1:
+        login.home()
+        interactiveMode(hash)
+    else:
+        commandLineMode(hash, sys.argv[1])
+   
 
 if __name__ == '__main__':
     main()
