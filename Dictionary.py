@@ -101,8 +101,6 @@ def interactiveMode(hash):
 
         system.pause()
 
-
-
 def main():
     if not os.path.exists(f'DB/'):
         os.mkdir("DB/")
@@ -117,6 +115,5 @@ def main():
     else:
         commandLineMode(hash, sys.argv[1])
    
-
 if __name__ == '__main__':
     main()

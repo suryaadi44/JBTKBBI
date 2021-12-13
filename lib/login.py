@@ -22,8 +22,8 @@ def register():
             elif username in username1:
                 print("Akun sudah terdaftar")
             else:
-                db = open("database.txt", "a")
-                db.write(username + "," + password + "\n")
+                with open("database.txt", "a") as db:
+                    db.write(username + "," + password + "\n")
                 print('Success!')
                 return
         register()
@@ -42,6 +42,7 @@ def access():
                 username1.append(a)
                 password1.append(b)
             data = dict(zip(username1, password1))
+            
             try:
                 if data[username]:
                     try:
@@ -49,6 +50,7 @@ def access():
                             print("Login Success")
                             print("Hai, ", username)
                             pause()
+                            return
                         else:
                             print("Password atau Username anda salah") 
                     except:
