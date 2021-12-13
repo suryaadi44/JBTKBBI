@@ -82,6 +82,14 @@ def interactiveMode(hash):
             elif pil == 2:
                 system.clear()
                 history.printHistory()
+            elif pil == 3:
+                system.clear()
+                print("Menu Setting :")
+                print(" 1.Delete History")
+                
+                pilSetting = int(input("Masukan Pilihan : "))
+                if pilSetting == 1:
+                    history.deleteHistory()
             elif pil == 4:
                 break
             else:
