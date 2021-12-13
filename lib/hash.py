@@ -31,6 +31,10 @@ class Hash:
         index = self.calcHash(kata)
         return self._table[index].search(kata)
 
+    def delete(self, index):
+        # Panggil methode delete pada tree
+        self._table[index].delete()
+
     @staticmethod
     def calcHash(kata):
         # Hitung index dari kata tanpa perlu menggunakan objek

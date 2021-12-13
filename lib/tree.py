@@ -45,3 +45,7 @@ class Tree:
         elif (kata < parent.kata and parent.left is not None):
             return self._search(parent.left, kata)
         return None
+
+    def delete(self):
+        # Hapus semua referensi object, sehingga garbage collector membebaskan semua memori
+        self.root = None
