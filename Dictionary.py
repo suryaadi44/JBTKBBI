@@ -51,6 +51,14 @@ def interactiveMode(hash):
                 pilSetting = int(input("Masukan Pilihan : "))
                 if pilSetting == 1:
                     history.deleteHistory()
+                elif pilSetting == 2 :
+                    kata_baru = input("Masukan Kata Baru : ")
+                    arti_baru = input("Masukkan Arti Kata : ")
+                    if database.addKata(hash, kata_baru, arti_baru):
+                        print("Kata berhasil ditambahkan")
+                    else:
+                        print("Kata telah ada")
+
                 elif pilSetting == 3 :
                     kata = input("\nMasukan Kata Yang Ingin Dihapus: ")
                     # hasil = hash.delete(kata.lower())
@@ -64,7 +72,7 @@ def interactiveMode(hash):
                     #     print("Kata Tidak Ditemukan")
                 elif pilSetting == 4:
                     kata=input("\nMasukan Kata Yang Ingin Diedit: ")
-                    arti_baru=input('Masukkan arti baru :')
+                    arti_baru=input('Masukkan arti baru : ')
 
                     if database.customizeKata(hash, kata.lower(), arti_baru):
                         print("Arti kata berhasil diedit")

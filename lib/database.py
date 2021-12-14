@@ -73,3 +73,19 @@ def customizeKata(table, kata, arti=None):
     loadTable(table, index)
     
     return cek
+
+def addKata(table, kata, arti):
+    hasil = table.search(kata.lower())
+    if hasil is None:
+        index = Hash.calcHash(kata)
+        file = f'/../DB/{fileNames[index]}'
+        with open(os.path.dirname(__file__) + file, 'a', encoding='utf-8') as csv_file:
+            csv_file.write(f'"{kata}","{arti}"\n')
+        
+        # memperbarui hash table
+        table.delete(index)
+        loadTable(table, index)
+
+        return 1
+    else:
+        return 0
