@@ -45,29 +45,29 @@ def access():
             
             try:
                 if data[username]:
-                    try:
-                        if password == data[username]:
-                            print("Login Success")
-                            print("Hai, ", username)
-                            pause()
-                            return
-                        else:
-                            print("Password atau Username anda salah") 
-                    except:
-                        print("Terjadi kesalahan")
+                    if password == data[username]:
+                        print("Login Success")
+                        print("Hai, ", username)
+                        pause()
+                        return
+                    else:
+                        print("Password atau Username anda salah") 
                 else:
-                    print("username tidak terdaftar")
+                    print("Username tidak terdaftar")
             except:
                 print("Login Eror")
                 print("Anda belum memiliki akun, silahkan Signup terlebih dahulu ")
-            home()
+    home()
             
 def home():
     clear()
     option = int(input("1.Login | 2.Signup: "))
-    if option == 1:
-        access()
-    elif option == 2:
-        register()
-    else:
-        print("please, enter an option")
+    try: 
+        if option == 1:
+            access()
+        elif option == 2:
+            register()
+        else:
+            print("Please, enter an option")
+    except ValueError:
+        print("Wrong Input")

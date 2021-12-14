@@ -9,6 +9,8 @@ import lib.database as database
 
 defaultDB = "shuffled_kbbi_python.csv"
 
+debug = 1
+
 def commandLineMode(hash, kata):
     #Program dijalankan dengang langsung memberikan kata tanpa melewati menu
     print(hash.search(kata.lower()))
@@ -97,7 +99,8 @@ def main():
     database.loadTable(hash)
 
     if len(sys.argv) == 1:
-        login.home()
+        if not debug:
+            login.home()
         interactiveMode(hash)
     else:
         commandLineMode(hash, sys.argv[1])
