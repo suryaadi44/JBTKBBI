@@ -87,10 +87,26 @@ def interactiveMode(hash):
                 system.clear()
                 print("Menu Setting :")
                 print(" 1.Delete History")
+                print(" 2.Add Kata")
+                print(" 3.Delete Kata")
+                print(" 4.Edit Kata")
                 
                 pilSetting = int(input("Masukan Pilihan : "))
                 if pilSetting == 1:
                     history.deleteHistory()
+                if pilSetting == 2:
+                    kata = input("\nMasukan Kata Yang Ingin Dihapus: ")
+                    # hasil = hash.delete(kata.lower())
+
+                    if hasil is not None :
+                        print(f'Kata {kata} berhasil dihapus')
+                    else:
+                        print("Kata Tidak Ditemukan")
+                # if pilSetting == 3:
+                #     history.deleteHistory()
+                # if pilSetting == 4:
+                #     history.deleteHistory()
+
             elif pil == 4:
                 break
             else:
