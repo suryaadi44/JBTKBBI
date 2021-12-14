@@ -1,14 +1,17 @@
 import lib.system as system
+import csv
+import os
 
 def register():
-    with open("database.txt", "r") as db:
+    file_account= '/../DB/account.csv'
+    with open(os.path.dirname(__file__) + file_account, 'r+') as account_file:
         username = input("Masukkan Username: ")
         password = input("Masukkan Password: ")
         confirm = input("Konfirmasi Password: ")
         username1 = []
         password1 = []
 
-        for i in db:
+        for i in account_file:
             a, b = i.split(",")
             b = b.strip()
             username1.append(a)
@@ -22,21 +25,21 @@ def register():
             elif username in username1:
                 print("Akun sudah terdaftar")
             else:
-                with open("database.txt", "a") as db:
-                    db.write(username + "," + password + "\n")
+                account_file.write(username + "," + password + "\n")
                 print('Success!')
                 return
         register()
 
 def access():
-    with open("database.txt", "r") as db:
+    file_account= '/../DB/account.csv'
+    with open(os.path.dirname(__file__) + file_account, 'r+') as account_file:
         username = input("Masukkan Username: ")
         password = input("Masukkan Password: ")
 
         if not len(username or password) < 1:
             username1 = []
             password1 = []
-            for i in db:
+            for i in account_file:
                 a, b = i.split(",")
                 b = b.strip()
                 username1.append(a)
