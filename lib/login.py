@@ -30,8 +30,8 @@ def register():
 
 def access():
     with open("database.txt", "r") as db:
-        username = input("Masukkan username: ")
-        password = input("Masukkan password: ")
+        username = input("Masukkan Username: ")
+        password = input("Masukkan Password: ")
 
         if not len(username or password) < 1:
             username1 = []
@@ -55,8 +55,8 @@ def access():
                 else:
                     print("Username tidak terdaftar")
             except:
-                print("Login Eror")
-                print("Anda belum memiliki akun, silahkan Signup terlebih dahulu ")
+                print("Login Error")
+                print("Anda belum memiliki akun, silahkan SignUp terlebih dahulu ")
     home()
             
 def home():

@@ -3,12 +3,11 @@ import sys
 from rich import print
 from lib.hash import Hash as Hash
 import lib.system as system
-import lib.history as history
+from lib.history import History as History
 import lib.login as login
 import lib.database as database
 
 defaultDB = "shuffled_kbbi_python.csv"
-
 debug = 1
 
 def commandLineMode(hash, kata):
@@ -31,7 +30,7 @@ def interactiveMode(hash):
             if pil == 1:
                 kata = input("\nMasukan Kata : ")
                 hasil = hash.search(kata.lower())
-                history.addHistory(kata)
+                History.addHistory(kata)
 
                 if hasil is not None :
                     print(f'Kata {kata} ditemukan')
@@ -41,7 +40,7 @@ def interactiveMode(hash):
                     print("Kata Tidak Ditemukan")
             elif pil == 2:
                 system.clear()
-                history.printHistory()
+                History.printHistory()
             elif pil == 3:
                 system.clear()
                 print("Menu Setting :")
@@ -52,9 +51,9 @@ def interactiveMode(hash):
                 
                 pilSetting = int(input("Masukan Pilihan : "))
                 if pilSetting == 1:
-                    history.deleteHistory()
+                    History.deleteHistory()
                 elif pilSetting == 2 :
-                    kata_baru = input("Masukan Kata Baru : ")
+                    kata_baru = input("\nMasukan Kata Baru : ")
                     arti_baru = input("Masukkan Arti Kata : ")
                     if database.addKata(hash, kata_baru, arti_baru):
                         print("Kata berhasil ditambahkan")
@@ -63,15 +62,11 @@ def interactiveMode(hash):
 
                 elif pilSetting == 3 :
                     kata = input("\nMasukan Kata Yang Ingin Dihapus: ")
-                    # hasil = hash.delete(kata.lower())
 
-                    # Memanggil fungsi hapus kata, return fungsi 1/0
-                    # database.customizeKata(hash, kata.lower())
-
-                    # if hasil is not None :
-                    #     print(f'Kata {kata} berhasil dihapus')
-                    # else:
-                    #     print("Kata Tidak Ditemukan")
+                    if database.customizeKata(hash, kata.lower()) :
+                        print(f'Kata {kata} berhasil dihapus')
+                    else:
+                        print("Kata Tidak Ditemukan")
                 elif pilSetting == 4:
                     kata=input("\nMasukan Kata Yang Ingin Diedit: ")
                     arti_baru=input('Masukkan arti baru : ')
