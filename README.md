@@ -33,8 +33,8 @@ Fitur-fitur yang ada sejauh ini:
 - [x] Search.
 - [x] History.
 - [x] Login.
-- [ ] Add Kata. **_(TBA)_**
-- [ ] Edit Kata. **_(TBA)_**
+- [x] Add Kata. 
+- [x] Edit Kata. 
 - [ ] Delete Kata. **_(TBA)_**
 
 ## Requirements
