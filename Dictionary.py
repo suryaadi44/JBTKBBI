@@ -8,7 +8,17 @@ import lib.login as login
 import lib.database as database
 
 defaultDB = "shuffled_kbbi_python.csv"
-debug = 1
+debug = 0
+
+def header():
+    system.clear()
+    print("""
+         ██╗██████╗ ████████╗██╗  ██╗██████╗ ██████╗ ██╗
+         ██║██╔══██╗╚══██╔══╝██║ ██╔╝██╔══██╗██╔══██╗██║
+         ██║██████╦╝   ██║   █████═╝ ██████╦╝██████╦╝██║
+    ██╗  ██║██╔══██╗   ██║   ██╔═██╗ ██╔══██╗██╔══██╗██║
+    ╚█████╔╝██████╦╝   ██║   ██║ ╚██╗██████╦╝██████╦╝██║
+    ╚════╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝ \n""")
 
 def commandLineMode(hash, kata):
     #Program dijalankan dengang langsung memberikan kata tanpa melewati menu
@@ -18,7 +28,7 @@ def interactiveMode(hash):
     #Program interaktif melalui menu
     while True:
         try:
-            system.clear()
+            header()
             print("Menu :")
             print(" 1.Search")
             print(" 2.History")
@@ -95,6 +105,7 @@ def main():
 
     if len(sys.argv) == 1:
         if not debug:
+            header()
             login.home()
         interactiveMode(hash)
     else:

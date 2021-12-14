@@ -2,9 +2,9 @@ from .system import *
 
 def register():
     with open("database.txt", "r") as db:
-        username = input("Masukkan username: ")
-        password = input("Masukkan password: ")
-        confirm = input("Konfirmasi password: ")
+        username = input("Masukkan Username: ")
+        password = input("Masukkan Password: ")
+        confirm = input("Konfirmasi Password: ")
         username1 = []
         password1 = []
 
@@ -60,8 +60,7 @@ def access():
     home()
             
 def home():
-    clear()
-    option = int(input("1.Login | 2.Signup: "))
+    option = int(input("1.Login | 2.Sign Up: "))
     try: 
         if option == 1:
             access()

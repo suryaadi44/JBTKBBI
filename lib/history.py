@@ -1,16 +1,11 @@
 history = [];
 
 class Stack:
-    def checkListHistory():
-        if(len(history) == 0):
-            return 0
-        return 1
-
     def addHistory(kata):
         history.append(kata)
 
-    def printHistory(self):
-        x = self.checkListHistory()
+    def printHistory():
+        x = checkListHistory()
         if (x == 0):
             print("Riwayat kosong")
         else:
@@ -18,10 +13,15 @@ class Stack:
             for i in range(len(history)):
                 print(f"{i + 1} {history[i]}")
 
-    def deleteHistory(self):
-        x = self.checkListHistory()
+    def deleteHistory():
+        x = checkListHistory()
         if (x == 0):
             print("Riwayat kosong")
         else:
             history.clear()
             print("Daftar Riwayat terhapus")
+
+def checkListHistory():
+    if(len(history) == 0):
+        return 0
+    return 1
