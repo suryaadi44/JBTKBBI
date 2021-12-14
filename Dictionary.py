@@ -1,56 +1,13 @@
 import os
 import sys
-import csv
-import time
 from rich import print
 from lib.hash import Hash as Hash
 import lib.system as system
 import lib.history as history
 import lib.login as login
+import lib.database as database
 
-fileNames = ['kbbi_a.csv', 'kbbi_b.csv', 'kbbi_c.csv', 'kbbi_d.csv', 'kbbi_e.csv', 'kbbi_f.csv', 'kbbi_g.csv', 'kbbi_h.csv', 'kbbi_i.csv', 'kbbi_j.csv', 'kbbi_k.csv', 'kbbi_l.csv', 'kbbi_m.csv','kbbi_n.csv', 'kbbi_o.csv', 'kbbi_p.csv', 'kbbi_q.csv', 'kbbi_r.csv', 'kbbi_s.csv', 'kbbi_t.csv', 'kbbi_u.csv', 'kbbi_v.csv', 'kbbi_w.csv', 'kbbi_x.csv', 'kbbi_y.csv', 'kbbi_z.csv']
 defaultDB = "shuffled_kbbi_python.csv"
-
-debug = 0
-
-def loadDB(file):
-    # Memecah DB menjadi beberapa file sesuai alfabet di huruf pertama dari kata
-    with open(file, encoding='utf-8') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        line_count = 0
-        for row in csv_reader:
-            kata, arti = row[0], row[1]
-
-            index = Hash.calcHash(kata)
-
-            with open(f'DB\{fileNames[index]}', 'a', encoding='utf-8') as fileData:
-                fileData.write(f'"{kata}","{arti}"\n')
-            
-            line_count += 1
-        if debug:
-            print(f'Processed {line_count} lines.')
-            time.sleep(0.5)
-
-
-def loadTable(hashTable, indeks=-1):
-    # Memasukan semua kata dan arti kata dari masing masing file ke table hashnya masing masing
-    # Secara default akan meload semua table, tapi jika diberikan nilai indeks, maka hanya indeks tersebut yang akan di load
-    for i in range(0, 26):
-        if indeks == -1 or indeks == i:
-            file = f'DB/{fileNames[i]}'
-            with open(file, encoding='utf-8') as csv_file:
-                csv_reader = csv.reader(csv_file, delimiter=',')
-                line_count = 0
-                for row in csv_reader:
-                    kata, arti = row[0], row[1]
-
-                    hashTable.add(i, kata, arti)
-
-                    line_count += 1
-                if debug:
-                    print(f'{fileNames[i]} : Processed {line_count} lines.')
-                    time.sleep(0.5)
-
 
 def commandLineMode(hash, kata):
     #Program dijalankan dengang langsung memberikan kata tanpa melewati menu
@@ -94,19 +51,33 @@ def interactiveMode(hash):
                 pilSetting = int(input("Masukan Pilihan : "))
                 if pilSetting == 1:
                     history.deleteHistory()
-                if pilSetting == 2:
+                elif pilSetting == 2 :
+                    kata_baru = input("Masukan Kata Baru : ")
+                    arti_baru = input("Masukkan Arti Kata : ")
+                    if database.addKata(hash, kata_baru, arti_baru):
+                        print("Kata berhasil ditambahkan")
+                    else:
+                        print("Kata telah ada")
+
+                elif pilSetting == 3 :
                     kata = input("\nMasukan Kata Yang Ingin Dihapus: ")
                     # hasil = hash.delete(kata.lower())
 
-                    if hasil is not None :
-                        print(f'Kata {kata} berhasil dihapus')
-                    else:
-                        print("Kata Tidak Ditemukan")
-                # if pilSetting == 3:
-                #     history.deleteHistory()
-                # if pilSetting == 4:
-                #     history.deleteHistory()
+                    # Memanggil fungsi hapus kata, return fungsi 1/0
+                    # database.customizeKata(hash, kata.lower())
 
+                    # if hasil is not None :
+                    #     print(f'Kata {kata} berhasil dihapus')
+                    # else:
+                    #     print("Kata Tidak Ditemukan")
+                elif pilSetting == 4:
+                    kata=input("\nMasukan Kata Yang Ingin Diedit: ")
+                    arti_baru=input('Masukkan arti baru : ')
+
+                    if database.customizeKata(hash, kata.lower(), arti_baru):
+                        print("Arti kata berhasil diedit")
+                    else:
+                        print("Kata tidak ditemukan")
             elif pil == 4:
                 break
             else:
@@ -120,10 +91,10 @@ def interactiveMode(hash):
 def main():
     if not os.path.exists(f'DB/'):
         os.mkdir("DB/")
-        loadDB(defaultDB)
+        database.loadDB(defaultDB)
         
     hash = Hash()
-    loadTable(hash)
+    database.loadTable(hash)
 
     if len(sys.argv) == 1:
         login.home()
