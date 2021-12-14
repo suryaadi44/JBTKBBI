@@ -1,4 +1,4 @@
-from .system import *
+import lib.system as system
 
 def register():
     with open("database.txt", "r") as db:
@@ -48,7 +48,7 @@ def access():
                     if password == data[username]:
                         print("Login Success")
                         print("Hai, ", username)
-                        pause()
+                        system.pause()
                         return
                     else:
                         print("Password atau Username anda salah") 
