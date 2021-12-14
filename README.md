@@ -33,9 +33,10 @@ Fitur-fitur yang ada sejauh ini:
 - [x] Search.
 - [x] History.
 - [x] Login.
+- [x] Register.
 - [x] Add Kata. 
 - [x] Edit Kata. 
-- [ ] Delete Kata. **_(TBA)_**
+- [x] Delete Kata.
 
 ## Requirements
 
