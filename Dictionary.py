@@ -3,7 +3,7 @@ import sys
 from rich import print
 from lib.hash import Hash as Hash
 import lib.system as system
-from lib.history import History as History
+from lib.history import Stack as Stack
 import lib.login as login
 import lib.database as database
 
@@ -30,7 +30,7 @@ def interactiveMode(hash):
             if pil == 1:
                 kata = input("\nMasukan Kata : ")
                 hasil = hash.search(kata.lower())
-                History.addHistory(kata)
+                Stack.addHistory(kata)
 
                 if hasil is not None :
                     print(f'Kata {kata} ditemukan')
@@ -40,7 +40,7 @@ def interactiveMode(hash):
                     print("Kata Tidak Ditemukan")
             elif pil == 2:
                 system.clear()
-                History.printHistory()
+                Stack.printHistory()
             elif pil == 3:
                 system.clear()
                 print("Menu Setting :")
@@ -51,7 +51,7 @@ def interactiveMode(hash):
                 
                 pilSetting = int(input("Masukan Pilihan : "))
                 if pilSetting == 1:
-                    History.deleteHistory()
+                    Stack.deleteHistory()
                 elif pilSetting == 2 :
                     kata_baru = input("\nMasukan Kata Baru : ")
                     arti_baru = input("Masukkan Arti Kata : ")
