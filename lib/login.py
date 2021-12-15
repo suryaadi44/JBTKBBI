@@ -1,5 +1,4 @@
 import lib.system as system
-import csv
 import os
 
 def register():
@@ -25,7 +24,7 @@ def register():
             elif username in username1:
                 print("Akun sudah terdaftar")
             else:
-                account_file.write(username + "," + password + "\n")
+                account_file.write(f"{username},{password}\n")
                 print('Success!')
                 return
         register()
@@ -73,3 +72,9 @@ def home():
             print("Please, enter an option")
     except ValueError:
         print("Wrong Input")
+
+def default():
+    file_account= '/../DB/account.csv'
+    if not os.path.exists(os.path.dirname(__file__) + file_account):
+        with open((os.path.dirname(__file__) + file_account), "w+") as acc:
+            acc.write("admin,admin\n")

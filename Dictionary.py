@@ -1,14 +1,14 @@
 import os
 import sys
 from rich import print
-from lib.hash import Hash as Hash
+from lib.hash import Hash
 import lib.system as system
-from lib.history import Stack as Stack
+from lib.history import Stack
 import lib.login as login
 import lib.database as database
 
 defaultDB = "shuffled_kbbi_python.csv"
-debug = 0
+debug = 1
 
 def header():
     system.clear()
@@ -28,6 +28,8 @@ def interactiveMode(hash):
     #Program interaktif melalui menu
     while True:
         try:
+            history = Stack()
+
             header()
             print("Menu :")
             print(" 1.Search")
@@ -40,7 +42,7 @@ def interactiveMode(hash):
             if pil == 1:
                 kata = input("\nMasukan Kata : ")
                 hasil = hash.search(kata.lower())
-                Stack.addHistory(kata)
+                history.addHistory(kata)
 
                 if hasil is not None :
                     print(f'Kata {kata} ditemukan')
@@ -50,7 +52,7 @@ def interactiveMode(hash):
                     print("Kata Tidak Ditemukan")
             elif pil == 2:
                 system.clear()
-                Stack.printHistory()
+                history.printHistory()
             elif pil == 3:
                 system.clear()
                 print("Menu Setting :")
@@ -61,7 +63,7 @@ def interactiveMode(hash):
                 
                 pilSetting = int(input("Masukan Pilihan : "))
                 if pilSetting == 1:
-                    Stack.deleteHistory()
+                    history.deleteHistory()
                 elif pilSetting == 2 :
                     kata_baru = input("\nMasukan Kata Baru : ")
                     arti_baru = input("Masukkan Arti Kata : ")
@@ -99,7 +101,9 @@ def main():
     if not os.path.exists(f'DB/'):
         os.mkdir("DB/")
         database.loadDB(defaultDB)
-        
+    
+    login.default()
+
     hash = Hash()
     database.loadTable(hash)
 
