@@ -1,14 +1,16 @@
-from .system import *
+import lib.system as system
+import os
 
 def register():
-    with open("database.txt", "r") as db:
-        username = input("Masukkan username: ")
-        password = input("Masukkan password: ")
-        confirm = input("Konfirmasi password: ")
+    file_account= '/../DB/account.csv'
+    with open(os.path.dirname(__file__) + file_account, 'r+') as account_file:
+        username = input("Masukkan Username: ")
+        password = input("Masukkan Password: ")
+        confirm = input("Konfirmasi Password: ")
         username1 = []
         password1 = []
 
-        for i in db:
+        for i in account_file:
             a, b = i.split(",")
             b = b.strip()
             username1.append(a)
@@ -22,21 +24,21 @@ def register():
             elif username in username1:
                 print("Akun sudah terdaftar")
             else:
-                with open("database.txt", "a") as db:
-                    db.write(username + "," + password + "\n")
+                account_file.write(f"{username},{password}\n")
                 print('Success!')
                 return
         register()
 
 def access():
-    with open("database.txt", "r") as db:
-        username = input("Masukkan username: ")
-        password = input("Masukkan password: ")
+    file_account= '/../DB/account.csv'
+    with open(os.path.dirname(__file__) + file_account, 'r+') as account_file:
+        username = input("Masukkan Username: ")
+        password = input("Masukkan Password: ")
 
         if not len(username or password) < 1:
             username1 = []
             password1 = []
-            for i in db:
+            for i in account_file:
                 a, b = i.split(",")
                 b = b.strip()
                 username1.append(a)
@@ -48,20 +50,19 @@ def access():
                     if password == data[username]:
                         print("Login Success")
                         print("Hai, ", username)
-                        pause()
+                        system.pause()
                         return
                     else:
                         print("Password atau Username anda salah") 
                 else:
                     print("Username tidak terdaftar")
             except:
-                print("Login Eror")
-                print("Anda belum memiliki akun, silahkan Signup terlebih dahulu ")
+                print("Login Error")
+                print("Anda belum memiliki akun, silahkan SignUp terlebih dahulu ")
     home()
             
 def home():
-    clear()
-    option = int(input("1.Login | 2.Signup: "))
+    option = int(input("1.Login | 2.Sign Up: "))
     try: 
         if option == 1:
             access()
@@ -71,3 +72,9 @@ def home():
             print("Please, enter an option")
     except ValueError:
         print("Wrong Input")
+
+def default():
+    file_account= '/../DB/account.csv'
+    if not os.path.exists(os.path.dirname(__file__) + file_account):
+        with open((os.path.dirname(__file__) + file_account), "w+") as acc:
+            acc.write("admin,admin\n")

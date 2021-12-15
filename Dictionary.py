@@ -1,15 +1,24 @@
 import os
 import sys
 from rich import print
-from lib.hash import Hash as Hash
+from lib.hash import Hash
 import lib.system as system
-import lib.history as history
+from lib.history import Stack
 import lib.login as login
 import lib.database as database
 
 defaultDB = "shuffled_kbbi_python.csv"
+debug = 0
 
-debug = 1
+def header():
+    system.clear()
+    print("""
+         ██╗██████╗ ████████╗██╗  ██╗██████╗ ██████╗ ██╗
+         ██║██╔══██╗╚══██╔══╝██║ ██╔╝██╔══██╗██╔══██╗██║
+         ██║██████╦╝   ██║   █████═╝ ██████╦╝██████╦╝██║
+    ██╗  ██║██╔══██╗   ██║   ██╔═██╗ ██╔══██╗██╔══██╗██║
+    ╚█████╔╝██████╦╝   ██║   ██║ ╚██╗██████╦╝██████╦╝██║
+    ╚════╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝ \n""")
 
 def commandLineMode(hash, kata):
     #Program dijalankan dengang langsung memberikan kata tanpa melewati menu
@@ -19,7 +28,9 @@ def interactiveMode(hash):
     #Program interaktif melalui menu
     while True:
         try:
-            system.clear()
+            history = Stack()
+
+            header()
             print("Menu :")
             print(" 1.Search")
             print(" 2.History")
@@ -54,7 +65,7 @@ def interactiveMode(hash):
                 if pilSetting == 1:
                     history.deleteHistory()
                 elif pilSetting == 2 :
-                    kata_baru = input("Masukan Kata Baru : ")
+                    kata_baru = input("\nMasukan Kata Baru : ")
                     arti_baru = input("Masukkan Arti Kata : ")
                     if database.addKata(hash, kata_baru, arti_baru):
                         print("Kata berhasil ditambahkan")
@@ -63,15 +74,11 @@ def interactiveMode(hash):
 
                 elif pilSetting == 3 :
                     kata = input("\nMasukan Kata Yang Ingin Dihapus: ")
-                    # hasil = hash.delete(kata.lower())
 
-                    # Memanggil fungsi hapus kata, return fungsi 1/0
-                    # database.customizeKata(hash, kata.lower())
-
-                    # if hasil is not None :
-                    #     print(f'Kata {kata} berhasil dihapus')
-                    # else:
-                    #     print("Kata Tidak Ditemukan")
+                    if database.customizeKata(hash, kata.lower()) :
+                        print(f'Kata {kata} berhasil dihapus')
+                    else:
+                        print("Kata Tidak Ditemukan")
                 elif pilSetting == 4:
                     kata=input("\nMasukan Kata Yang Ingin Diedit: ")
                     arti_baru=input('Masukkan arti baru : ')
@@ -94,12 +101,15 @@ def main():
     if not os.path.exists(f'DB/'):
         os.mkdir("DB/")
         database.loadDB(defaultDB)
-        
+    
+    login.default()
+
     hash = Hash()
     database.loadTable(hash)
 
     if len(sys.argv) == 1:
         if not debug:
+            header()
             login.home()
         interactiveMode(hash)
     else:

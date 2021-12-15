@@ -1,26 +1,27 @@
-history = [];
+class Stack:
+    stack = [];
 
-def checkListHistory():
-    if(len(history) == 0):
-        return 0
-    return 1
+    def addHistory(self, kata):
+        self.stack.append(kata)
 
-def addHistory(kata):
-    history.append(kata)
+    def printHistory(self):
+        if (not self.checkListHistory()):
+            print("Riwayat kosong")
+            return
+        
+        print(f"Daftar Riwayat : {len(self.stack)}")
+        for i in range(len(self.stack)):
+            print(f"{i + 1} {self.stack[i]}")
 
-def printHistory():
-    x = checkListHistory()
-    if (x == 0):
-        print("Riwayat kosong")
-    else:
-        print("Daftar Riwayat")
-        for i in range(len(history)):
-            print(f"{i + 1} {history[i]}")
-
-def deleteHistory():
-    x = checkListHistory()
-    if (x == 0):
-        print("Riwayat kosong")
-    else:
-        history.clear()
+    def deleteHistory(self):
+        if (not self.checkListHistory()):
+            print("Riwayat kosong")
+            return
+            
+        self.stack.clear()
         print("Daftar Riwayat terhapus")
+
+    def checkListHistory(self):
+        if(len(self.stack) == 0):
+            return 0
+        return 1
