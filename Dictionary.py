@@ -8,7 +8,7 @@ import lib.login as login
 import lib.database as database
 
 defaultDB = "shuffled_kbbi_python.csv"
-debug = 1
+debug = 0
 
 def header():
     system.clear()

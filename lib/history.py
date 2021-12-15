@@ -9,8 +9,7 @@ class Stack:
             print("Riwayat kosong")
             return
         
-        print("Daftar Riwayat")
-        print(len(self.stack))
+        print(f"Daftar Riwayat : {len(self.stack)}")
         for i in range(len(self.stack)):
             print(f"{i + 1} {self.stack[i]}")
 
