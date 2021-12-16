@@ -8,10 +8,12 @@ fileNames = ['kbbi_a.csv', 'kbbi_b.csv', 'kbbi_c.csv', 'kbbi_d.csv', 'kbbi_e.csv
 debug = 0
 
 def loadDB(file):
+    parent = os.path.dirname(__file__) 
     # Memecah DB menjadi beberapa file sesuai alfabet di huruf pertama dari kata
-    with open(file, encoding='utf-8') as csv_file:
+    with open(f"{parent}/../{file}", encoding='utf-8') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
+
         for row in csv_reader:
             kata, arti = row[0], row[1]
 
