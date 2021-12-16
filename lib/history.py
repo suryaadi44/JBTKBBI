@@ -1,17 +1,21 @@
+from datetime import datetime
+
 class Stack:
     stack = [];
+    timestamp = [];
 
-    def addHistory(self, kata):
+    def addHistory(self, kata, time):
         self.stack.append(kata)
+        self.timestamp.append(time)
 
     def printHistory(self):
         if (not self.checkListHistory()):
             print("Riwayat kosong")
             return 0
         
-        print(f"Daftar Riwayat : {len(self.stack)}")
+        print(f"Jumlah Daftar Riwayat : {len(self.stack)}")
         for i in range(len(self.stack)):
-            print(f"{i + 1} {self.stack[i]}")
+            print(f"{i + 1}. {self.stack[i]} {self.timestamp[i]}")
         
         return 1
 
@@ -21,6 +25,7 @@ class Stack:
             return
             
         self.stack.clear()
+        self.timestamp.clear()
         print("Daftar Riwayat terhapus")
 
     def checkListHistory(self):
@@ -34,3 +39,8 @@ class Stack:
                 return self.stack[i]
         
         return None
+
+    def getTime(self):
+        self.now = datetime.now()
+        self.now = self.now.strftime("%H:%M:%S")
+        return self.now
