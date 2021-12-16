@@ -12,7 +12,8 @@ class Stack:
         print(f"Daftar Riwayat : {len(self.stack)}")
         for i in range(len(self.stack)):
             print(f"{i + 1} {self.stack[i]}")
-            return 1
+        
+        return 1
 
     def deleteHistory(self):
         if (not self.checkListHistory()):
