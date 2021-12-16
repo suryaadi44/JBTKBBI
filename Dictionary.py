@@ -42,9 +42,9 @@ def interactiveMode(hash):
             if pil == 1:
                 kata = input("\nMasukan Kata : ")
                 hasil = hash.search(kata.lower())
-                history.addHistory(kata)
 
                 if hasil is not None :
+                    history.addHistory(kata)
                     print(f'Kata {kata} ditemukan')
                     print(f'\n{kata} :')
                     print(hasil)
@@ -52,7 +52,16 @@ def interactiveMode(hash):
                     print("Kata Tidak Ditemukan")
             elif pil == 2:
                 system.clear()
-                history.printHistory()
+                if history.printHistory() :
+                    pil_history = int(input("\nMasukkan pilihan history (0 untuk kembali) : "))
+                    if pil_history != 0 :
+                        kata = history.searchHistory(pil_history-1)
+                        if kata is not None :
+                            hasil = hash.search(kata.lower())
+                            print(f'\n{kata} :')
+                            print(hasil)
+                        else :
+                            print("\nPilihan history tidak tersedia")
             elif pil == 3:
                 system.clear()
                 print("Menu Setting :")
