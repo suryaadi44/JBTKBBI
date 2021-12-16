@@ -10,6 +10,10 @@ class Stack:
         self.stack.insert(0, kata)
         self.timestamp.insert(0, datetime.now().strftime("%H:%M:%S"))
 
+        if len(self.stack) > 10:
+            self.stack.pop()
+            self.timestamp.pop()
+
     def printHistory(self):
         if (not self.checkListHistory()):
             print("Riwayat kosong")

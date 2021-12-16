@@ -1,6 +1,7 @@
 import os
 import sys
 from rich import print
+from rich.panel import Panel
 from lib.hash import Hash
 import lib.system as system
 from lib.history import Stack
@@ -13,13 +14,14 @@ debug = 0
 
 def header():
     system.clear()
-    print("""
-         ██╗██████╗ ████████╗██╗  ██╗██████╗ ██████╗ ██╗
-         ██║██╔══██╗╚══██╔══╝██║ ██╔╝██╔══██╗██╔══██╗██║
-         ██║██████╦╝   ██║   █████═╝ ██████╦╝██████╦╝██║
-    ██╗  ██║██╔══██╗   ██║   ██╔═██╗ ██╔══██╗██╔══██╗██║
-    ╚█████╔╝██████╦╝   ██║   ██║ ╚██╗██████╦╝██████╦╝██║
-    ╚════╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝ \n""")
+    print(Panel.fit("""
+[red]      ██╗██████╗ ████████╗[/red][white]██╗  ██╗██████╗ ██████╗ ██╗ [/white]
+[red]      ██║██╔══██╗╚══██╔══╝[/red][white]██║ ██╔╝██╔══██╗██╔══██╗██║ [/white]
+[red]      ██║██████╦╝   ██║   [/red][white]█████═╝ ██████╦╝██████╦╝██║ [/white]
+[red] ██╗  ██║██╔══██╗   ██║   [/red][white]██╔═██╗ ██╔══██╗██╔══██╗██║ [/white]
+[red] ╚█████╔╝██████╦╝   ██║   [/red][white]██║ ╚██╗██████╦╝██████╦╝██║ [/white]
+[red]  ╚════╝ ╚═════╝    ╚═╝   [/red][white]╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚═╝ [/white] 
+[red]     Just Basic Terminal [/red][white]Kamus Besar Bahasa Indonesia [/white]\n"""))
 
 
 def commandLineMode(hash, kata):
