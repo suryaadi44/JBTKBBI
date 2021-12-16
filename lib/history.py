@@ -14,7 +14,7 @@ class Stack:
             return 0
         
         print(f"Jumlah Daftar Riwayat : {len(self.stack)}")
-        for i in range(len(self.stack)):
+        for i in reversed(range(len(self.stack))):
             print(f"{i + 1}. {self.stack[i]} {self.timestamp[i]}")
         
         return 1
