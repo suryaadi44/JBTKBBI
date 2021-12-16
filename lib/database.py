@@ -19,7 +19,7 @@ def loadDB(file):
 
             index = Hash.calcHash(kata)
 
-            with open(f'DB\{fileNames[index]}', 'a', encoding='utf-8') as fileData:
+            with open(f'{parent}/../DB/{fileNames[index]}', 'a', encoding='utf-8') as fileData:
                 fileData.write(f'"{kata}","{arti}"\n')
             
             line_count += 1
@@ -33,8 +33,8 @@ def loadTable(hashTable, indeks=-1):
     # Secara default akan meload semua table, tapi jika diberikan nilai indeks, maka hanya indeks tersebut yang akan di load
     for i in range(0, 26):
         if indeks == -1 or indeks == i:
-            file = f'/../DB/{fileNames[i]}'
-            with open(os.path.dirname(__file__) + file, encoding='utf-8') as csv_file:
+            file = f'{os.path.dirname(__file__)}/../DB/{fileNames[i]}'
+            with open(file, encoding='utf-8') as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=',')
                 line_count = 0
                 for row in csv_reader:
@@ -49,12 +49,12 @@ def loadTable(hashTable, indeks=-1):
 
 def customizeKata(table, kata, arti=None):
     index = Hash.calcHash(kata)
-    file = f'/../DB/{fileNames[index]}'
-    file_temp = '/../DB/temp.csv'
+    file = f'{os.path.dirname(__file__)}/../DB/{fileNames[index]}'
+    file_temp = f'{os.path.dirname(__file__)}/../DB/temp.csv'
 
     cek = 0 #menandai apakah proses berhasil atau tidak
-    with open(os.path.dirname(__file__) + file, encoding='utf-8') as csv_file:
-        with open(os.path.dirname(__file__) + file_temp, 'w', encoding='utf-8') as temp_file:
+    with open(file, encoding='utf-8') as csv_file:
+        with open(file_temp, 'w', encoding='utf-8') as temp_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             for row in csv_reader:
@@ -66,8 +66,8 @@ def customizeKata(table, kata, arti=None):
                     temp_file.write(f'"{row[0]}","{row[1]}"\n')
                 line_count += 1
  
-    os.remove(os.path.dirname(__file__) + file)    
-    os.rename(os.path.dirname(__file__) + file_temp, os.path.dirname(__file__) + file)
+    os.remove(file)    
+    os.rename(file_temp, file)
 
     # memperbarui hash table
 
@@ -80,8 +80,8 @@ def addKata(table, kata, arti):
     hasil = table.search(kata.lower())
     if hasil is None:
         index = Hash.calcHash(kata)
-        file = f'/../DB/{fileNames[index]}'
-        with open(os.path.dirname(__file__) + file, 'a', encoding='utf-8') as csv_file:
+        file = f'{os.path.dirname(__file__)}/../DB/{fileNames[index]}'
+        with open(file, 'a', encoding='utf-8') as csv_file:
             csv_file.write(f'"{kata}","{arti}"\n')
         
         # memperbarui hash table
