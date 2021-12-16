@@ -56,8 +56,7 @@ def interactiveMode(hash):
             elif pil == 2:
                 system.clear()
                 if history.printHistory():
-                    pil_history = int(
-                        input("\nMasukkan pilihan history (0 untuk kembali) : "))
+                    pil_history = int(input("\nMasukkan pilihan history (0 untuk kembali) : "))
                     if pil_history != 0:
                         kata = history.searchHistory(pil_history - 1)
                         if kata is not None:

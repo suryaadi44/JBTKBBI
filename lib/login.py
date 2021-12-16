@@ -62,8 +62,8 @@ def access():
     home()
             
 def home():
-    option = int(input("1.Login | 2.Sign Up: "))
     try: 
+        option = int(input("1.Login | 2.Sign Up: "))
         if option == 1:
             access()
         elif option == 2:
