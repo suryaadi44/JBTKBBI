@@ -71,7 +71,8 @@ def home():
         else:
             print("Please, enter an option")
     except ValueError:
-        print("Wrong Input")
+        home()
+
 
 def default():
     file_account= '/../DB/account.csv'

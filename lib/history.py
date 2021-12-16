@@ -41,6 +41,6 @@ class Stack:
         return 1
 
     def searchHistory(self, index):
-        if len(self.stack) > index and index > 0:
+        if len(self.stack) >= index and index > 0:
             return self.stack[index]
         return None
