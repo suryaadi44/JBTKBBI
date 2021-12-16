@@ -44,8 +44,7 @@ def interactiveMode(hash):
                 hasil = hash.search(kata.lower())
 
                 if hasil is not None :
-                    timestamp = history.getTime()
-                    history.addHistory(kata, timestamp)
+                    history.addHistory(kata)
                     print(f'Kata {kata} ditemukan')
                     print(f'\n{kata} :')
                     print(hasil)
@@ -59,8 +58,7 @@ def interactiveMode(hash):
                         kata = history.searchHistory(pil_history-1)
                         if kata is not None :
                             hasil = hash.search(kata.lower())
-                            timestamp = history.getTime()
-                            history.addHistory(kata, timestamp)
+                            history.addHistory(kata)
                             print(f'\n{kata} :')
                             print(hasil)
                         else :
