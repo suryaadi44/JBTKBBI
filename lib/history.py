@@ -1,25 +1,37 @@
+from datetime import datetime
+from rich import print
+from rich.table import Table
+
 class Stack:
-    stack = [];
+    stack = []
+    timestamp = []
 
     def addHistory(self, kata):
-        self.stack.append(kata)
+        self.stack.insert(0, kata)
+        self.timestamp.insert(0, datetime.now().strftime("%H:%M:%S"))
 
     def printHistory(self):
         if (not self.checkListHistory()):
             print("Riwayat kosong")
             return 0
-        
-        print(f"Daftar Riwayat : {len(self.stack)}")
+
+        print(f"Jumlah Daftar Riwayat : {len(self.stack)}")
+        table = Table()
+        table.add_column("No", style="cyan", no_wrap=True)
+        table.add_column("Kata", style="magenta")
+        table.add_column("Time", style="green")
+
         for i in range(len(self.stack)):
-            print(f"{i + 1} {self.stack[i]}")
-        
+            table.add_row(str(i + 1), self.stack[i], self.timestamp[i])
+        print(table)
+
         return 1
 
     def deleteHistory(self):
         if (not self.checkListHistory()):
             print("Riwayat kosong")
             return
-            
+
         self.stack.clear()
         print("Daftar Riwayat terhapus")
 
@@ -27,10 +39,8 @@ class Stack:
         if(len(self.stack) == 0):
             return 0
         return 1
-    
+
     def searchHistory(self, index):
-        for i in range (len(self.stack)):
-            if i == index:
-                return self.stack[i]
-        
+        if len(self.stack) > index and index > 0:
+            return self.stack[index]
         return None

@@ -58,6 +58,7 @@ def interactiveMode(hash):
                         kata = history.searchHistory(pil_history-1)
                         if kata is not None :
                             hasil = hash.search(kata.lower())
+                            history.addHistory(kata)
                             print(f'\n{kata} :')
                             print(hasil)
                         else :
